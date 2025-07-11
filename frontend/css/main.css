@@ -1,0 +1,730 @@
+/* ==========================================================================
+   AXEL ERP - Main Stylesheet
+   Sistema de Gestão de Créditos de Reciclagem
+   ========================================================================== */
+
+/* ==========================================================================
+   CSS Variables (Custom Properties)
+   ========================================================================== */
+:root {
+    /* Layout */
+    --sidebar-width: 250px;
+    --header-height: 60px;
+    --footer-height: 40px;
+    
+    /* Colors */
+    --primary-color: #0b132b;
+    --secondary-color: #1c2541;
+    --accent-color: #90e0ef;
+    --text-light: #ffffff;
+    --text-muted-light: rgba(255, 255, 255, 0.7);
+    --body-bg: #f8f9fa;
+    
+    /* RGB values for rgba usage */
+    --primary-color-rgb: 11, 19, 43;
+    --secondary-color-rgb: 28, 37, 65;
+    --accent-color-rgb: 144, 224, 239;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Shadows */
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 4px 15px rgba(0, 0, 0, 0.15);
+    
+    /* Border radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    
+    /* Z-index scale */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    --z-toast: 1090;
+    --z-loading: 9999;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--body-bg);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", 
+                 "Noto Sans", "Liberation Sans", Arial, sans-serif, 
+                 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 
+                 "Noto Color Emoji";
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   Sidebar Navigation
+   ========================================================================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: var(--text-muted-light);
+    padding-top: 0;
+    transition: transform var(--transition-normal);
+    z-index: var(--z-fixed);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-heavy);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-header {
+    padding: var(--spacing-md);
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header img {
+    max-width: 60%;
+    height: auto;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+    transition: filter var(--transition-fast);
+}
+
+.sidebar-header img:hover {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.sidebar-menu {
+    padding: 0;
+    list-style: none;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: var(--spacing-sm);
+    margin-bottom: 0;
+}
+
+.sidebar-menu li {
+    position: relative;
+}
+
+.sidebar-menu li a,
+.sidebar-menu li .submenu-toggle {
+    color: var(--text-muted-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1.2rem;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li .submenu-toggle:hover {
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+}
+
+.sidebar-menu li a:focus,
+.sidebar-menu li .submenu-toggle:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+}
+
+.sidebar-menu li a i,
+.sidebar-menu li .submenu-toggle i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    transition: color var(--transition-fast);
+    font-size: 1rem;
+}
+
+.sidebar-menu li a:hover i,
+.sidebar-menu li .submenu-toggle:hover i {
+    color: var(--accent-color);
+}
+
+/* Active state indicator */
+.sidebar-menu li.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: var(--accent-color);
+    border-radius: 0 2px 2px 0;
+}
+
+.sidebar-menu li.active > a,
+.sidebar-menu li.active > .submenu-toggle {
+    color: var(--text-light);
+    background-color: rgba(var(--accent-color-rgb), 0.1);
+    font-weight: 500;
+}
+
+.sidebar-menu li.active > a i,
+.sidebar-menu li.active > .submenu-toggle i {
+    color: var(--text-light);
+}
+
+/* Submenu styles */
+.submenu {
+    list-style: none;
+    padding-left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+.submenu.collapsing {
+    transition: height var(--transition-normal), opacity var(--transition-fast);
+    opacity: 0;
+}
+
+.submenu.show {
+    transition: height var(--transition-normal), opacity var(--transition-fast) 0.1s;
+    opacity: 1;
+}
+
+.submenu li a {
+    padding-left: 2.8rem;
+    font-size: 0.9em;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+.submenu li a:hover {
+    background-color: rgba(var(--accent-color-rgb), 0.15);
+    color: var(--accent-color);
+}
+
+/* Submenu toggle arrow */
+.submenu-toggle::after {
+    content: "\f054";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    transition: transform var(--transition-normal);
+    font-size: 0.8em;
+    color: var(--text-muted-light);
+}
+
+.submenu-toggle[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+    color: var(--accent-color);
+}
+
+/* ==========================================================================
+   Main Content Area
+   ========================================================================== */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: var(--spacing-lg);
+    transition: margin-left var(--transition-normal);
+    width: calc(100% - var(--sidebar-width));
+    flex-grow: 1;
+    padding-bottom: calc(var(--footer-height) + var(--spacing-md));
+    min-height: calc(100vh - var(--footer-height));
+}
+
+/* ==========================================================================
+   Top Navigation Bar
+   ========================================================================== */
+.navbar-top {
+    background-color: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0.75rem var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-light);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.navbar-top h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   Card Components
+   ========================================================================== */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-light);
+    margin-bottom: var(--spacing-lg);
+    background-color: white;
+    transition: box-shadow var(--transition-fast);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-medium);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+    padding: 0.9rem 1.2rem;
+    color: #343a40;
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+}
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all var(--transition-fast);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all var(--transition-fast);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.toggle-sidebar {
+    color: var(--primary-color);
+    border: 1px solid #dee2e6;
+    transition: all var(--transition-fast);
+}
+
+.toggle-sidebar:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* ==========================================================================
+   Toast Notifications
+   ========================================================================== */
+#toast-container {
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    z-index: var(--z-toast);
+    max-width: 400px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(var(--primary-color-rgb), 0.85);
+    color: var(--text-light);
+    text-align: center;
+    padding: var(--spacing-sm) 0;
+    font-size: 0.9rem;
+    z-index: var(--z-fixed);
+    height: var(--footer-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   Loading States
+   ========================================================================== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-loading);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast), visibility var(--transition-fast);
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-overlay:not(.active) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Overlay específico para módulos (não fixo) */
+.card-body .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius-md);
+    z-index: 100;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   Interactive Elements
+   ========================================================================== */
+.interactive-card {
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.interactive-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy) !important;
+}
+
+/* ==========================================================================
+   Status Indicators
+   ========================================================================== */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.status-disponivel { background-color: #28a745; }
+.status-enviada { background-color: #17a2b8; }
+.status-vendida { background-color: #007bff; }
+.status-reprovada { background-color: #dc3545; }
+.status-pendente { background-color: #ffc107; }
+.status-ofertada { background-color: #6c757d; }
+
+/* ==========================================================================
+   Tooltips
+   ========================================================================== */
+.custom-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.custom-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: var(--border-radius-sm);
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    z-index: var(--z-tooltip);
+    box-shadow: var(--shadow-medium);
+}
+
+.custom-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Progress Indicators
+   ========================================================================== */
+.progress-thin {
+    height: 6px;
+    border-radius: 3px;
+}
+
+.progress-bar-total {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+/* ==========================================================================
+   Form Enhancements
+   ========================================================================== */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.25);
+}
+
+/* ==========================================================================
+   Chart Containers
+   ========================================================================== */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin: var(--spacing-md) 0;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+@media (max-width: 1200px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .toggle-sidebar {
+        display: inline-block !important;
+    }
+
+    .navbar-top {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 100%;
+    }
+    
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: var(--spacing-sm);
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+
+    .navbar-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .navbar-top h1 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: var(--spacing-md);
+    }
+
+    .sidebar-menu li a,
+    .sidebar-menu li .submenu-toggle {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .submenu li a {
+        padding-left: 2.5rem;
+        font-size: 0.85em;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+    .sidebar,
+    .navbar-top,
+    footer,
+    .toggle-sidebar {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #333333;
+        --accent-color: #0066cc;
+        --text-light: #ffffff;
+        --text-muted-light: #cccccc;
+    }
+
+    .card {
+        border: 2px solid #000000;
+    }
+
+    .btn {
+        border-width: 2px;
+    }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .loading-spinner {
+        animation: none;
+    }
+}

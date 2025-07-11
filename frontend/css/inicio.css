@@ -1,0 +1,361 @@
+/* frontend/css/inicio.css */
+
+/* Cores customizadas (sugestão de paleta moderna se diferente de main.css) */
+:root {
+    --primary-modern: #4A90E2;
+    /* Azul vibrante */
+    --secondary-modern: #6D7B8D;
+    /* Cinza suave */
+    --accent-modern: #1ED760;
+    /* Verde vivo */
+    --card-bg: rgba(255, 255, 255, 0.95);
+    /* Quase branco, levemente transparente */
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+
+/* Estilos para o container da página principal */
+.main-page-container {
+    background-image: url('../assets/images/inicio-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+    /* Garante que o fundo cubra a tela toda */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* Padding geral para telas grandes */
+}
+
+/* Container do Bootstrap ajustado para centralizar conteúdo */
+.container-fluid.py-4 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1400px;
+    /* Limite para não esticar demais em telas muito largas */
+}
+
+/* Seção de Boas-Vindas */
+.welcome-section {
+    padding: 20px 0;
+    max-width: 800px;
+    margin-bottom: 3rem;
+    /* Espaçamento entre o título e o card */
+}
+
+.welcome-section h1 {
+    color: var(--primary-modern);
+    font-size: 3.5rem;
+    /* Tamanho maior para impacto */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section .lead {
+    color: var(--secondary-modern);
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* Card da Calculadora Ambiental */
+.calculator-card {
+    background-color: var(--card-bg);
+    border-radius: 18px;
+    /* Cantos mais arredondados */
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    /* Sombra mais pronunciada */
+    backdrop-filter: blur(8px);
+    /* Efeito glassmorphism sutil */
+    -webkit-backdrop-filter: blur(8px);
+    /* Para compatibilidade Webkit */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Borda sutil para o efeito */
+    padding: 2.5rem;
+    /* Padding interno maior */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.calculator-card:hover {
+    transform: translateY(-5px);
+    /* Efeito de "levantar" no hover */
+    box-shadow: 0 15px 40px var(--shadow-medium);
+}
+
+.calculator-card .card-body {
+    padding: 0;
+    /* Remove padding padrão do card-body, já controlamos no pai */
+}
+
+.calculator-card .fa-3x {
+    font-size: 3.5em !important;
+    /* Ícone maior */
+    color: var(--accent-modern);
+    /* Usando a cor de destaque */
+    margin-bottom: 1.5rem !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-card .card-title {
+    font-size: 2.5rem !important;
+    color: #343a40;
+    /* Cor mais escura para o título */
+    font-weight: 700;
+    /* Mais negrito */
+    margin-bottom: 1rem;
+}
+
+.calculator-card .lead {
+    font-size: 1.1rem !important;
+    color: #6c757d;
+    margin-bottom: 2rem !important;
+}
+
+/* Itens de Impacto Individuais */
+.impact-item {
+    background: #ffffff;
+    /* Fundo branco puro para os itens */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Borda muito sutil */
+    border-radius: 12px;
+    /* Cantos arredondados */
+    box-shadow: 0 4px 15px var(--shadow-light);
+    /* Sombra suave */
+    padding: 1.25rem !important;
+    /* Padding ajustado */
+    height: 100%;
+    /* Garante que todos os itens tenham a mesma altura */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.impact-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.impact-item h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #343a40;
+    /* Cor mais escura para o título do impacto */
+}
+
+.impact-item h5 i {
+    font-size: 0.9em;
+    /* Ícone um pouco menor dentro do título */
+    margin-right: 8px;
+}
+
+/* Estilos para os valores de impacto (os números grandes) */
+.impacto-valor {
+    font-size: 2.2rem !important;
+    /* Tamanho maior para os números */
+    font-weight: 800;
+    /* Ultra negrito */
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+    /* Evita que o texto quebre em várias linhas */
+    overflow: hidden;
+    /* Esconde o texto que excede o contêiner */
+    text-overflow: ellipsis;
+    /* Adiciona '...' se o texto for muito longo */
+}
+
+.impact-item small {
+    font-size: 0.85rem;
+    color: #888;
+    text-align: center;
+}
+
+/* Botão de Atualização */
+.custom-btn-impact {
+    background-image: linear-gradient(to right, #4A90E2 0%, #76B4F7 100%);
+    /* Gradiente azul */
+    border: none;
+    border-radius: 50px;
+    /* Mais arredondado (estilo pill) */
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.custom-btn-impact:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background-position: right center;
+    /* Anima o gradiente */
+    background-size: 200% auto;
+    color: white;
+    /* Garante que a cor do texto permaneça branca */
+}
+
+.custom-btn-impact i {
+    margin-right: 10px;
+}
+
+/* Feedback da Calculadora */
+#feedback-calculadora {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+}
+
+/* Media Queries para Responsividade */
+
+/* Para tablets e telas menores que desktop (md breakpoint) */
+@media (max-width: 991.98px) {
+    .welcome-section h1 {
+        font-size: 2.8rem;
+    }
+
+    .welcome-section .lead {
+        font-size: 1.1rem;
+    }
+
+    .calculator-card {
+        padding: 1.8rem;
+    }
+
+    .calculator-card .fa-3x {
+        font-size: 3em !important;
+    }
+
+    .calculator-card .card-title {
+        font-size: 2.2rem !important;
+    }
+
+    .calculator-card .lead {
+        font-size: 1rem !important;
+    }
+
+    .impact-item h5 {
+        font-size: 1rem;
+    }
+
+    .impacto-valor {
+        font-size: 1.8rem !important;
+    }
+
+    .impact-item small {
+        font-size: 0.8rem;
+    }
+
+    .custom-btn-impact {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+/* Para smartphones (sm breakpoint) */
+@media (max-width: 767.98px) {
+    .main-page-container {
+        padding: 15px;
+        /* Reduz padding geral */
+    }
+
+    .welcome-section {
+        margin-bottom: 2rem;
+    }
+
+    .welcome-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .welcome-section .lead {
+        font-size: 0.95rem;
+    }
+
+    .calculator-card {
+        padding: 1.2rem;
+    }
+
+    .calculator-card .fa-3x {
+        font-size: 2.5em !important;
+    }
+
+    .calculator-card .card-title {
+        font-size: 1.8rem !important;
+    }
+
+    .calculator-card .lead {
+        font-size: 0.9rem !important;
+    }
+
+    .impact-item {
+        padding: 1rem !important;
+        margin-bottom: 10px;
+        /* Adiciona margem entre os itens em colunas individuais */
+    }
+
+    .impact-item h5 {
+        font-size: 0.95rem;
+    }
+
+    .impacto-valor {
+        font-size: 1.5rem !important;
+    }
+
+    .impact-item small {
+        font-size: 0.75rem;
+    }
+
+    .custom-btn-impact {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Faz os itens de impacto ocuparem 100% da largura em telas muito pequenas */
+    .row.g-3 .col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Para telas muito pequenas (ex: iPhone 5/SE) */
+@media (max-width: 575.98px) {
+    .welcome-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .welcome-section .lead {
+        font-size: 0.85rem;
+    }
+
+    .calculator-card {
+        padding: 1rem;
+    }
+
+    .calculator-card .fa-3x {
+        font-size: 2em !important;
+    }
+
+    .calculator-card .card-title {
+        font-size: 1.5rem !important;
+    }
+
+    .impacto-valor {
+        font-size: 1.2rem !important;
+    }
+
+    .custom-btn-impact {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+}

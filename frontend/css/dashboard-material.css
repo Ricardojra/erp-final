@@ -1,0 +1,73 @@
+/* Estiliza os cards de materiais com transição suave e borda arredondada */
+.material-card .card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Adiciona efeito de elevação e sombra ao passar o mouse sobre os cards */
+.material-card .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Define a altura e borda arredondada das barras de progresso */
+.progress-thin {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* Aplica peso à fonte para valores de status dos materiais */
+.material-status-value {
+    font-weight: 500;
+}
+
+/* Define altura mínima para o contêiner do gráfico */
+.chart-container {
+    position: relative;
+    min-height: 300px;
+}
+
+/* Estiliza ícones de materiais com tamanho e margem */
+.material-icon {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+/* Adiciona borda inferior ao cabeçalho dos cards */
+.card-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Define cores específicas para cada tipo de material */
+.text-vidro {
+    color: #ffc107;
+    /* Amarelo para vidro */
+}
+
+.text-plastico {
+    color: #17a2b8;
+    /* Azul claro para plástico */
+}
+
+.text-metal {
+    color: #6f42c1;
+    /* Roxo para metal */
+}
+
+.text-papel {
+    color: #28a745;
+    /* Verde para papel */
+}
+
+.text-papelao {
+    color: #8B4513;
+    /* Marrom para papelão */
+}
+
+/* Define cor personalizada para a barra de progresso do total geral */
+.progress-bar-total {
+    background-color: #6c757d;
+    /* Cinza escuro, mais visível que bg-secondary */
+}

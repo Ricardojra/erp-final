@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente por XML</title>
+    
+    <style>
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><i class="fas fa-user-plus me-2"></i>Cadastro de Cliente por XML</h5>
+            </div>
+            <div class="card-body position-relative">
+                <!-- Seção de Importação de XML -->
+                <div class="mb-4">
+                    <label for="xml-file-input" class="form-label fw-bold">Selecione o arquivo XML da Nota
+                        Fiscal:</label>
+                    <input type="file" id="xml-file-input" class="form-control" accept=".xml">
+                    <div class="d-flex justify-content-end mt-2">
+                        <button id="process-xml-btn" class="btn btn-primary me-2" type="button">
+                            <i class="fas fa-file-import me-1"></i> Processar XML
+                        </button>
+                        <button id="clear-xml-btn" class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-eraser me-1"></i> Limpar
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Formulário de Dados do Cliente -->
+                <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>Dados do Cliente</h5>
+                <form id="client-form">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="cnpj" class="form-label">CNPJ</label>
+                            <input type="text" class="form-control" id="cnpj" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="razao-social" class="form-label">Razão Social</label>
+                            <input type="text" class="form-control" id="razao-social" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nome-fantasia" class="form-label">Nome Fantasia</label>
+                            <input type="text" class="form-control" id="nome-fantasia"
+                                placeholder="Preenchido se disponível no XML ou editável">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="endereco" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="endereco" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="uf" class="form-label">UF</label>
+                            <input type="text" class="form-control" id="uf" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cep" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="cep" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email-contato" class="form-label">Email de Contato (Opcional)</label>
+                            <input type="email" class="form-control" id="email-contato"
+                                placeholder="Pode ser preenchido manualmente">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="telefone-contato" class="form-label">Telefone de Contato (Opcional)</label>
+                            <input type="text" class="form-control" id="telefone-contato"
+                                placeholder="Pode ser preenchido manualmente">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="whatsapp-numero" class="form-label">WhatsApp (Opcional)</label>
+                            <input type="text" class="form-control" id="whatsapp-numero"
+                                placeholder="Pode ser preenchido manualmente">
+                        </div>
+                        <!-- NOVO CAMPO: Nome para Contato -->
+                        <div class="col-md-6">
+                            <label for="nome-contato" class="form-label">Nome para Contato (Opcional)</label>
+                            <input type="text" class="form-control" id="nome-contato"
+                                placeholder="Nome da pessoa de contato na empresa">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="submit" id="save-client-btn" class="btn btn-success" disabled>
+                            <i class="fas fa-save me-1"></i> Salvar Cliente
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Overlay de carregamento -->
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                </div>
+
+                <!-- Feedback geral -->
+                <div id="feedback-message" class="mt-3"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- REMOVIDO: jQuery - já carregado em main.html -->
+    <!-- REMOVIDO: Bootstrap 5 JS - já carregado em main.html -->
+    <!-- Script personalizado para esta página -->
+    <script src="./js/cadastro-cliente-xml.js"></script>
+</body>
+
+</html>

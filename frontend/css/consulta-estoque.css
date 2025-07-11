@@ -1,0 +1,103 @@
+/*
+ * consulta-estoque.css
+ * Estilos específicos para o módulo de Consulta de Estoque.
+ */
+
+/* Estilo para a overlay de carregamento */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    /* Acima de outros elementos, como modais (z-index modal é 1050) */
+    border-radius: 0.375rem;
+    /* Borda arredondada do card */
+}
+
+/* Ocultar o overlay por padrão (controlado via JS) */
+.loading-overlay.d-none {
+    display: none !important;
+}
+
+/* Estilos para os cards de resumo e materiais */
+#notes-summary-cards-container .card,
+#material-cards-container .card {
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+#notes-summary-cards-container .card:hover,
+#material-cards-container .card:hover {
+    transform: translateY(-3px);
+}
+
+/* Cores dos textos para materiais (conforme definido no JS) */
+.text-metal {
+    color: #6c757d;
+    /* Cinza */
+}
+
+.text-papel {
+    color: #0d6efd;
+    /* Azul Bootstrap Primary */
+}
+
+.text-papelao {
+    color: #fd7e14;
+    /* Laranja Bootstrap Warning */
+}
+
+.text-plastico {
+    color: #6610f2;
+    /* Roxo Bootstrap Indigo */
+}
+
+.text-vidro {
+    color: #198754;
+    /* Verde Bootstrap Success */
+}
+
+/* Estilos para os badges de status */
+.badge {
+    padding: 0.4em 0.6em;
+    border-radius: 0.375rem;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+/* Ajustes para a tabela DataTables */
+#notes-table th,
+#notes-table td {
+    vertical-align: middle;
+}
+
+#notes-table thead th {
+    background-color: #f8f9fa;
+    /* Light gray background for table header */
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Estilo para o campo de busca (opcional, se você quiser um estilo específico) */
+#search-input {
+    border-radius: 0.25rem;
+}
+
+/* Estilo para botões de ação na tabela (se necessário) */
+.edit-status-btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+}
+
+/* Espaçamento para o modal de edição de status, se necessário */
+#editStatusModal .modal-title {
+    font-weight: 500;
+}

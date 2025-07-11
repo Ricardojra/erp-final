@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Gestão Axel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/inicio.css">
+    <style>
+        /* CSS para a imagem de fundo transparente */
+        body {
+            background-image: url('../assets/images/inicio-bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+            /* REMOVER ESTA LINHA: overflow-y: hidden; */
+            /* Permite a rolagem vertical */
+        }
+
+        /* Estilos adicionais para melhorar a legibilidade sobre o fundo */
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+        }
+
+        .text-primary,
+        .text-muted,
+        .text-dark {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- AJUSTES PARA O DESIGN (Mantidos da versão anterior) --- */
+
+        /* Reduzir o padding vertical do contêiner principal */
+        .container-fluid.py-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+            min-height: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ajustar margem inferior do título principal */
+        .row.mb-5.text-center {
+            margin-bottom: 2rem !important;
+        }
+
+        /* Reduzir margens internas do card */
+        .card .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Ajustar tamanho e margem dos ícones grandes */
+        .card-body .fa-3x {
+            font-size: 2.5em !important;
+            margin-bottom: 1rem !important;
+        }
+
+        /* Reduzir margem inferior dos títulos e parágrafos dentro do card */
+        .card-title.fs-3 {
+            font-size: 2rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .card .lead.fs-6 {
+            font-size: 0.95rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* Reduzir o padding dos blocos individuais de impacto e suas margens */
+        .row.g-2.text-center .col-md-4>div,
+        .row.g-2.text-center .col-md-6>div {
+            padding: 1rem !important;
+        }
+
+        .row.g-2.text-center .col-md-6.mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        /* Ajustar o tamanho da fonte dos números de impacto */
+        .p-2.border.rounded.bg-light p.fw-bold {
+            font-size: 1.6rem !important;
+        }
+
+        /* Ajustar a margem superior do botão de atualização */
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        /* Media query para telas menores para mais compactação */
+        @media (max-width: 768px) {
+            .container-fluid.py-5 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+
+            .card-body .fa-3x {
+                font-size: 2em !important;
+                margin-bottom: 0.8rem !important;
+            }
+
+            .card-title.fs-3 {
+                font-size: 1.8rem !important;
+            }
+
+            .card .lead.fs-6 {
+                font-size: 0.9rem !important;
+            }
+
+            .p-2.border.rounded.bg-light p.fw-bold {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid py-5 d-flex flex-column align-items-center justify-content-center"
+        style="min-height: calc(100vh - 56px)">
+        <div class="row mb-5 text-center">
+            <div class="col-12">
+                <h1 class="display-4 text-primary fw-bold">
+                    <i class="fas fa-recycle me-3 text-success"></i>Plataforma de Gestão
+                    Axel
+                </h1>
+                <p class="lead text-muted mt-3">
+                    Gerencie seus créditos de reciclagem, notas fiscais e inventário com
+                    eficiência e transparência.
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center g-3 mb-5 w-100" style="max-width: 1200px">
+            <div class="col-12">
+                <div class="card shadow-lg h-100 border-0 rounded-3 text-center bg-white p-3">
+                    <div class="card-body">
+                        <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+                        <h2 class="card-title text-dark mb-2 fs-3">Calculadora Ambiental de Vendas</h2>
+                        <p class="lead text-muted mb-3 fs-6">
+                            Veja o impacto ambiental positivo dos materiais que você reciclou e vendeu.
+                        </p>
+
+                        <div class="row g-2 text-center">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="p-2 border rounded bg-light">
+                                    <h5 class="text-success mb-1 fs-6"><i class="fas fa-cloud-sun me-1"></i>CO2 Evitado
+                                    </h5>
+                                    <p class="fw-bold text-success" style="font-size: 1.8rem;" id="impacto-co2">0 Ton
+                                    </p>
+                                    <small class="text-muted">Equivalente a árvores plantadas</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="p-2 border rounded bg-light">
+                                    <h5 class="text-primary mb-1 fs-6"><i class="fas fa-water me-1"></i>Água Poupada
+                                    </h5>
+                                    <p class="fw-bold text-primary" style="font-size: 1.8rem;" id="impacto-agua">0 kL
+                                    </p>
+                                    <small class="text-muted">Consumo diário de residências</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="p-2 border rounded bg-light">
+                                    <h5 class="text-warning mb-1 fs-6"><i class="fas fa-lightbulb me-1"></i>Energia
+                                        Economizada</h5>
+                                    <p class="fw-bold text-warning" style="font-size: 1.8rem;" id="impacto-energia">0
+                                        MWh</p>
+                                    <small class="text-muted">Eletricidade de casas por mês</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 mt-3">
+                                <div class="p-2 border rounded bg-light">
+                                    <h5 class="text-info mb-1 fs-6"><i
+                                            class="fas fa-trash-restore-alt me-1"></i>Resíduos Desviados</h5>
+                                    <p class="fw-bold text-info" style="font-size: 1.8rem;" id="residuos-desviados">0
+                                        Ton
+                                    </p>
+                                    <small class="text-muted">Materiais que não foram para aterros</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 mt-3">
+                                <div class="p-2 border rounded bg-light">
+                                    <h5 class="text-secondary mb-1 fs-6"><i class="fas fa-tree me-1"></i>Recursos
+                                        Naturais Preservados</h5>
+                                    <p class="fw-bold text-secondary" style="font-size: 1.8rem;"
+                                        id="recursos-preservados">0 unidades</p>
+                                    <small class="text-muted">Matéria-prima virgem que não precisou ser extraída</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <button id="btnAtualizarImpacto" class="btn btn-info btn-lg">
+                                <i class="fas fa-sync-alt me-2"></i> Atualizar Impacto
+                            </button>
+                            <div id="feedback-calculadora" class="alert d-none mt-3" role="alert"></div>
+                        </div>
+                        
+                        <!-- NOVO: Gráficos visuais dos impactos -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Visualização do Impacto</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                                <h6 class="text-center text-muted mb-3">Contribuição por Material (kg)</h6>
+                                                <div class="chart-container">
+                                                    <canvas id="graficoContribuicao"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <h6 class="text-center text-muted mb-3">Impacto Total por Categoria</h6>
+                                                <div class="chart-container">
+                                                    <canvas id="graficoImpactoTotal"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

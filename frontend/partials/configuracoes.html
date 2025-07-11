@@ -1,0 +1,334 @@
+<div class="container-fluid px-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="text-primary fw-bold">
+                <i class="fas fa-cog me-2"></i>Configurações do Sistema
+            </h2>
+            <p class="text-muted">Gerencie as configurações e preferências do ERP Axel</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Configurações Gerais -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-sliders-h me-2"></i>Configurações Gerais
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="configGeraisForm">
+                        <div class="mb-3">
+                            <label for="empresaNome" class="form-label">Nome da Empresa</label>
+                            <input type="text" class="form-control" id="empresaNome" value="Axel Consultoria">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="unidadeGestora" class="form-label">Unidade Gestora Padrão</label>
+                            <input type="text" class="form-control" id="unidadeGestora" placeholder="Digite a unidade gestora padrão">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="timezone" class="form-label">Fuso Horário</label>
+                            <select class="form-select" id="timezone">
+                                <option value="America/Sao_Paulo" selected>Brasília (GMT-3)</option>
+                                <option value="America/Manaus">Manaus (GMT-4)</option>
+                                <option value="America/Belem">Belém (GMT-3)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="idioma" class="form-label">Idioma</label>
+                            <select class="form-select" id="idioma">
+                                <option value="pt-BR" selected>Português (Brasil)</option>
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Salvar Configurações
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configurações de Notificações -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bell me-2"></i>Notificações
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="configNotificacoesForm">
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notifEmail" checked>
+                                <label class="form-check-label" for="notifEmail">
+                                    Notificações por E-mail
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notifSistema" checked>
+                                <label class="form-check-label" for="notifSistema">
+                                    Notificações do Sistema
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notifWhatsapp">
+                                <label class="form-check-label" for="notifWhatsapp">
+                                    Notificações WhatsApp
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="emailNotificacoes" class="form-label">E-mail para Notificações</label>
+                            <input type="email" class="form-control" id="emailNotificacoes" placeholder="seu@email.com">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-save me-2"></i>Salvar Notificações
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configurações de Backup -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="fas fa-database me-2"></i>Backup e Segurança
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Último Backup</label>
+                        <p class="text-muted mb-2">Nunca realizado</p>
+                        <button class="btn btn-warning btn-sm" id="btnBackup">
+                            <i class="fas fa-download me-2"></i>Realizar Backup
+                        </button>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="backupAutomatico">
+                            <label class="form-check-label" for="backupAutomatico">
+                                Backup Automático Diário
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="retencaoBackup" class="form-label">Retenção de Backups (dias)</label>
+                        <input type="number" class="form-control" id="retencaoBackup" value="30" min="1" max="365">
+                    </div>
+                    
+                    <button class="btn btn-outline-warning btn-sm" id="btnRestaurar">
+                        <i class="fas fa-upload me-2"></i>Restaurar Backup
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configurações de Performance -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-tachometer-alt me-2"></i>Performance
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="cacheTimeout" class="form-label">Timeout do Cache (minutos)</label>
+                        <input type="number" class="form-control" id="cacheTimeout" value="5" min="1" max="60">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="registrosPorPagina" class="form-label">Registros por Página</label>
+                        <select class="form-select" id="registrosPorPagina">
+                            <option value="10">10 registros</option>
+                            <option value="25" selected>25 registros</option>
+                            <option value="50">50 registros</option>
+                            <option value="100">100 registros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="lazyLoading" checked>
+                            <label class="form-check-label" for="lazyLoading">
+                                Carregamento Lazy (melhora performance)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save me-2"></i>Aplicar Configurações
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logs do Sistema -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list-alt me-2"></i>Logs do Sistema
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Data/Hora</th>
+                                    <th>Usuário</th>
+                                    <th>Ação</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsTable">
+                                <tr>
+                                    <td>2025-01-30 14:30:25</td>
+                                    <td>Sistema</td>
+                                    <td>Inicialização do ERP</td>
+                                    <td><span class="badge bg-success">Sucesso</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2025-01-30 14:25:10</td>
+                                    <td>Admin</td>
+                                    <td>Importação de NF-e</td>
+                                    <td><span class="badge bg-info">Processando</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-outline-secondary btn-sm" id="btnLimparLogs">
+                        <i class="fas fa-trash me-2"></i>Limpar Logs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Inicialização das configurações
+document.addEventListener('DOMContentLoaded', function() {
+    // Carregar configurações salvas
+    carregarConfiguracoes();
+    
+    // Event listeners
+    document.getElementById('configGeraisForm').addEventListener('submit', salvarConfigGerais);
+    document.getElementById('configNotificacoesForm').addEventListener('submit', salvarConfigNotificacoes);
+    document.getElementById('btnBackup').addEventListener('click', realizarBackup);
+    document.getElementById('btnRestaurar').addEventListener('click', restaurarBackup);
+    document.getElementById('btnLimparLogs').addEventListener('click', limparLogs);
+});
+
+function carregarConfiguracoes() {
+    // Carregar configurações do localStorage
+    const configs = JSON.parse(localStorage.getItem('axelConfigs') || '{}');
+    
+    if (configs.empresaNome) document.getElementById('empresaNome').value = configs.empresaNome;
+    if (configs.unidadeGestora) document.getElementById('unidadeGestora').value = configs.unidadeGestora;
+    if (configs.timezone) document.getElementById('timezone').value = configs.timezone;
+    if (configs.idioma) document.getElementById('idioma').value = configs.idioma;
+    if (configs.emailNotificacoes) document.getElementById('emailNotificacoes').value = configs.emailNotificacoes;
+    if (configs.cacheTimeout) document.getElementById('cacheTimeout').value = configs.cacheTimeout;
+    if (configs.registrosPorPagina) document.getElementById('registrosPorPagina').value = configs.registrosPorPagina;
+    
+    // Checkboxes
+    document.getElementById('notifEmail').checked = configs.notifEmail !== false;
+    document.getElementById('notifSistema').checked = configs.notifSistema !== false;
+    document.getElementById('notifWhatsapp').checked = configs.notifWhatsapp === true;
+    document.getElementById('backupAutomatico').checked = configs.backupAutomatico === true;
+    document.getElementById('lazyLoading').checked = configs.lazyLoading !== false;
+}
+
+function salvarConfigGerais(e) {
+    e.preventDefault();
+    
+    const configs = {
+        empresaNome: document.getElementById('empresaNome').value,
+        unidadeGestora: document.getElementById('unidadeGestora').value,
+        timezone: document.getElementById('timezone').value,
+        idioma: document.getElementById('idioma').value
+    };
+    
+    localStorage.setItem('axelConfigs', JSON.stringify(configs));
+    
+    // Mostrar notificação de sucesso
+    if (window.appUtils && window.appUtils.showNotification) {
+        window.appUtils.showNotification('Configurações Salvas', 'As configurações gerais foram salvas com sucesso.', 'success');
+    }
+}
+
+function salvarConfigNotificacoes(e) {
+    e.preventDefault();
+    
+    const configs = JSON.parse(localStorage.getItem('axelConfigs') || '{}');
+    configs.notifEmail = document.getElementById('notifEmail').checked;
+    configs.notifSistema = document.getElementById('notifSistema').checked;
+    configs.notifWhatsapp = document.getElementById('notifWhatsapp').checked;
+    configs.emailNotificacoes = document.getElementById('emailNotificacoes').value;
+    
+    localStorage.setItem('axelConfigs', JSON.stringify(configs));
+    
+    if (window.appUtils && window.appUtils.showNotification) {
+        window.appUtils.showNotification('Notificações Configuradas', 'As configurações de notificação foram salvas.', 'success');
+    }
+}
+
+function realizarBackup() {
+    // Simular backup
+    const btn = document.getElementById('btnBackup');
+    const originalText = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Realizando Backup...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        
+        if (window.appUtils && window.appUtils.showNotification) {
+            window.appUtils.showNotification('Backup Concluído', 'O backup foi realizado com sucesso.', 'success');
+        }
+    }, 3000);
+}
+
+function restaurarBackup() {
+    if (confirm('Tem certeza que deseja restaurar o backup? Isso pode sobrescrever dados atuais.')) {
+        if (window.appUtils && window.appUtils.showNotification) {
+            window.appUtils.showNotification('Restauração Iniciada', 'A restauração do backup foi iniciada.', 'info');
+        }
+    }
+}
+
+function limparLogs() {
+    if (confirm('Tem certeza que deseja limpar todos os logs?')) {
+        document.getElementById('logsTable').innerHTML = '';
+        if (window.appUtils && window.appUtils.showNotification) {
+            window.appUtils.showNotification('Logs Limpos', 'Todos os logs foram removidos.', 'success');
+        }
+    }
+}
+</script> 

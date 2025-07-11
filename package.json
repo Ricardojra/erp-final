@@ -1,0 +1,27 @@
+{
+  "name": "projeto-axel",
+  "version": "07.07.25 Versão da Plaforma de Gestão Axel",
+  "description": "Plataforma de gestão de estoque e vendas para o projeto Axel.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js",
+    "create-db": "dotenv -e ./backend/.env -- psql -U postgres -d gestao_estoque -f criar_banco_zerado_completo.sql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.4.9",
+    "chartjs-plugin-trendline": "^2.1.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^2.0.1",
+    "pg": "^8.11.3",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0"
+  }
+}

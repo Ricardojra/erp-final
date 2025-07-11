@@ -1,0 +1,1 @@
+SELECT status, COUNT(*) AS total FROM notas_fiscais GROUP BY status;

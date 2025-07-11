@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alteração de Cadastro de Cliente</title>
+    <!-- REMOVIDO: Bootstrap CSS - já carregado em main.html -->
+    <!-- REMOVIDO: Font Awesome - já carregado em main.html -->
+    <style>
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        /* Esconde o formulário de cliente por padrão */
+        #client-form-section {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><i class="fas fa-user-edit me-2"></i>Alteração de Cadastro de Cliente</h5>
+            </div>
+            <div class="card-body position-relative">
+                <!-- Seção de Busca de Cliente -->
+                <div class="mb-4">
+                    <label for="search-cnpj" class="form-label fw-bold">Buscar Cliente por CNPJ:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search-cnpj"
+                            placeholder="Digite o CNPJ (apenas números)">
+                        <button class="btn btn-primary" type="button" id="search-client-btn">
+                            <i class="fas fa-search me-1"></i> Buscar
+                        </button>
+                    </div>
+                    <div id="search-feedback" class="mt-2"></div>
+                </div>
+
+                <hr>
+
+                <!-- Formulário de Dados do Cliente (inicialmente oculto) -->
+                <div id="client-form-section">
+                    <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>Dados do Cliente</h5>
+                    <form id="client-form">
+                        <input type="hidden" id="client-id"> <!-- Campo oculto para armazenar o ID do cliente -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cnpj" class="form-label">CNPJ</label>
+                                <input type="text" class="form-control" id="cnpj" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="razao-social" class="form-label">Razão Social</label>
+                                <input type="text" class="form-control" id="razao-social" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nome-fantasia" class="form-label">Nome Fantasia</label>
+                                <input type="text" class="form-control" id="nome-fantasia"
+                                    placeholder="Preenchido se disponível no XML ou editável">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nome-contato" class="form-label">Nome para Contato (Opcional)</label>
+                                <input type="text" class="form-control" id="nome-contato"
+                                    placeholder="Nome da pessoa de contato na empresa">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="endereco" class="form-label">Endereço</label>
+                                <input type="text" class="form-control" id="endereco">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="uf" class="form-label">UF</label>
+                                <input type="text" class="form-control" id="uf">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cep">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email-contato" class="form-label">Email de Contato (Opcional)</label>
+                                <input type="email" class="form-control" id="email-contato"
+                                    placeholder="Pode ser preenchido manualmente">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefone-contato" class="form-label">Telefone de Contato (Opcional)</label>
+                                <input type="text" class="form-control" id="telefone-contato"
+                                    placeholder="Pode ser preenchido manualmente">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="whatsapp-numero" class="form-label">WhatsApp (Opcional)</label>
+                                <input type="text" class="form-control" id="whatsapp-numero"
+                                    placeholder="Pode ser preenchido manualmente">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ativo" class="form-label">Status</label>
+                                <select class="form-select" id="ativo">
+                                    <option value="true">Ativo</option>
+                                    <option value="false">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit" id="update-client-btn" class="btn btn-success">
+                                <i class="fas fa-save me-1"></i> Atualizar Cliente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Overlay de carregamento -->
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                </div>
+
+                <!-- Feedback geral -->
+                <div id="feedback-message" class="mt-3"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script personalizado para esta página -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="./js/alteracao-cadastro.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Estoque por Cliente</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-search-dollar me-2"></i>Consulta de Notas por Cliente</h5>
+            </div>
+            <div class="card-body">
+                <!-- Filtros -->
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label for="filter-client-select" class="form-label">Cliente</label>
+                        <select id="filter-client-select" class="form-select" data-placeholder="Selecione um cliente"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="year-filter" class="form-label">Ano</label>
+                        <select id="year-filter" class="form-select">
+                            <option value="">Todos os Anos</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button id="search-notes-btn" class="btn btn-primary me-2">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                        <button id="limpar-filtros" class="btn btn-secondary">
+                            <i class="fas fa-eraser"></i> Limpar
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Container para Alertas/Feedback -->
+                <div id="alert-placeholder-consulta-notas"></div>
+
+                <!-- Resumo e Materiais -->
+                <div id="notes-summary-cards-container" class="row mb-4"></div>
+                <div id="material-cards-container" class="row mb-4"></div>
+
+                <!-- Tabela de Notas -->
+                <div class="table-responsive">
+                    <table id="notas-fiscais-table" class="table table-striped table-hover" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Nº Nota</th>
+                                <th>Data Emissão</th>
+                                <th>Material</th>
+                                <th>Quantidade (Ton)</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados preenchidos via DataTables -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Edição de Status -->
+    <div class="modal fade" id="editStatusModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alterar Status da Nota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Nota Fiscal: <strong id="modal-note-number"></strong></p>
+                    <input type="hidden" id="edit-note-id">
+                    <div class="mb-3">
+                        <label class="form-label">Status Atual</label>
+                        <input type="text" id="edit-current-status" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-new-status" class="form-label">Novo Status</label>
+                        <select id="edit-new-status" class="form-select">
+                            <option value="">Selecione...</option>
+                            <option value="disponivel">Disponível</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="reprovada">Reprovada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="saveStatusChangeBtn" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- O script é carregado pelo main.js -->
+</body>
+</html> 

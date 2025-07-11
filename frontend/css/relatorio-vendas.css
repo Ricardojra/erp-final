@@ -1,0 +1,324 @@
+/* Estilos específicos para o Relatório de Vendas */
+
+/* Cards de métricas */
+.metrica-card {
+    transition: transform 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.metrica-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.metrica-card .card-body {
+    padding: 1.5rem;
+}
+
+.metrica-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.metrica-card .card-text {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Filtros avançados */
+.filtros-avancados .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.filtros-avancados .btn-outline-secondary {
+    border-color: rgba(255,255,255,0.3);
+    color: white;
+}
+
+.filtros-avancados .btn-outline-secondary:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* Tabela de resultados */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.table-dark {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: none;
+}
+
+.table-dark th {
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+/* Botões de ação */
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+}
+
+.btn-detalhes-venda,
+.btn-imprimir-venda {
+    transition: all 0.2s ease;
+}
+
+.btn-detalhes-venda:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-imprimir-venda:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+/* Paginação */
+.pagination .page-link {
+    border: none;
+    color: #495057;
+    margin: 0 2px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: transparent;
+}
+
+/* Gráficos */
+.grafico-container {
+    position: relative;
+    height: 300px;
+}
+
+.grafico-container canvas {
+    border-radius: 8px;
+}
+
+/* Modais */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+/* Checkboxes personalizados */
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.form-check-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .metrica-card .card-body {
+        padding: 1rem;
+    }
+    
+    .metrica-card .card-text {
+        font-size: 1.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .btn-group-sm .btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Estados de carregamento */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Tooltips personalizados */
+.tooltip-custom {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-custom .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-custom:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para exportação */
+.export-buttons .btn {
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.export-buttons .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Estilos para filtros salvos */
+.filtros-salvos {
+    background-color: #e3f2fd;
+    border: 1px solid #2196f3;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.filtros-salvos .badge {
+    background-color: #2196f3;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Estilos para métricas em destaque */
+.metrica-destaque {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.metrica-destaque .card-title {
+    color: rgba(255,255,255,0.9);
+}
+
+.metrica-destaque .card-text {
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+/* Estilos para tabela com zebra */
+.table-zebra tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.02);
+}
+
+/* Estilos para colunas ordenáveis */
+.coluna-ordenavel {
+    cursor: pointer;
+    user-select: none;
+}
+
+.coluna-ordenavel:hover {
+    background-color: rgba(0,123,255,0.1);
+}
+
+.coluna-ordenavel::after {
+    content: '↕';
+    margin-left: 0.5rem;
+    opacity: 0.5;
+}
+
+.coluna-ordenavel.asc::after {
+    content: '↑';
+    opacity: 1;
+}
+
+.coluna-ordenavel.desc::after {
+    content: '↓';
+    opacity: 1;
+} 

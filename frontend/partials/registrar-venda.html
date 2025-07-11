@@ -1,0 +1,144 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <h5 class="mb-0">Buscar Notas Fiscais para Venda</h5>
+  </div>
+  <div class="card-body">
+    <div class="form-group mb-3">
+      <label for="searchNumerosNotas">Números das Notas Fiscais (separar por vírgula):</label>
+      <input type="text" class="form-control" id="searchNumerosNotas" placeholder="Ex: 12345, 67890, 112233">
+      <small class="form-text text-muted">Informe um ou mais números de notas fiscais para selecionar.</small>
+    </div>
+    <button type="button" class="btn btn-primary" id="btnBuscarNotas">Buscar Notas</button>
+    <div id="feedback-search-notes" class="alert mt-3 d-none" role="alert"></div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h5 class="mb-0">Notas Disponíveis para Venda</h5>
+  </div>
+  <div class="card-body">
+    <p id="total-itens-selecionados" class="text-info">Total de itens selecionados: 0 item(s).</p>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" id="notas-disponiveis-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;"><input type="checkbox" id="selectAllItems"></th>
+            <th>Número da Nota</th>
+            <th>Emissão</th>
+            <th>Emitente</th>
+            <th>Unidade Gestora</th>
+            <th>Material</th>
+            <th>Quantidade (Ton)</th>
+            <th>Valor Unitário (R$/Ton)</th>
+            <th>Valor Total (R$)</th>
+            <th>Status Atual</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h5 class="mb-0">Resumo da Venda</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card bg-info text-white">
+          <div class="card-body text-center">
+            <h6 class="card-title">Quantidade Total</h6>
+            <h4 id="quantidade-total-vendida">0 Ton</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-success text-white">
+          <div class="card-body text-center">
+            <h6 class="card-title">Valor Total</h6>
+            <h4 id="valor-total-pedido">R$ 0,00</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-warning text-dark">
+          <div class="card-body text-center">
+            <h6 class="card-title">Valor Unitário Médio</h6>
+            <h4 id="valor-unitario-medio">R$ 0,00/Ton</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-primary text-white">
+          <div class="card-body text-center">
+            <h6 class="card-title">Itens Selecionados</h6>
+            <h4 id="itens-selecionados-count">0</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h5 class="mb-0">Detalhes da Transação de Venda</h5>
+  </div>
+  <div class="card-body">
+    <form id="formRegistrarVenda">
+      <div class="form-group mb-3">
+        <label for="clienteCompradorNome">Nome do Cliente Comprador:</label>
+        <input type="text" class="form-control" id="clienteCompradorNome" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="clienteCompradorDocumento">CNPJ do do Cliente Comprador:</label>
+        <input type="text" class="form-control" id="clienteCompradorDocumento">
+      </div>
+      <div class="form-group mb-3">
+        <label for="valorUnitarioVenda">Valor Unitário por Tonelada (R$/Ton):</label>
+        <input type="number" class="form-control" id="valorUnitarioVenda" step="0.01" min="0" placeholder="Ex: 800.00">
+        <small class="form-text text-muted">Valor por tonelada que será aplicado aos itens selecionados</small>
+      </div>
+      <div class="form-group mb-3">
+        <label for="valorTotalVenda">Valor Total da Venda:</label>
+        <input type="number" class="form-control" id="valorTotalVenda" step="0.01" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="numeroPedidoCompraVenda">Número do Pedido de Compra (da Venda):</label>
+        <input type="text" class="form-control" id="numeroPedidoCompraVenda" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="unidadeGestoraVenda">Unidade Gestora da Venda:</label>
+        <input type="text" class="form-control" id="unidadeGestoraVenda" required>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="form-group mb-3">
+        <label for="numeroNfServicoAxel">Nota Fiscal de Serviço (Axel):</label>
+        <input type="text" class="form-control" id="numeroNfServicoAxel" placeholder="Nº da NF de serviço emitida para o cliente">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="clienteFinal">Cliente Final (Atendido pelo seu cliente):</label>
+        <input type="text" class="form-control" id="clienteFinal" placeholder="Nome do cliente final">
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="dataVenda">Data da Venda:</label>
+        <input type="date" class="form-control" id="dataVenda" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="observacoesVenda">Observações:</label>
+        <textarea class="form-control" id="observacoesVenda" rows="3"></textarea>
+      </div>
+      <div id="feedback-venda-data" class="alert mt-3 d-none" role="alert"></div>
+      <button type="submit" class="btn btn-success" id="btnRegistrarVenda">Registrar Venda</button>
+      <div id="feedback-message" class="alert mt-3 d-none" role="alert"></div>
+    </form>
+  </div>
+</div>

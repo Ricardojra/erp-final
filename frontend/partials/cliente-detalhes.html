@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Cliente</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Seção de Detalhes do Cliente -->
+        <div class="card mb-4" id="cliente-info-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><i class="fas fa-user-tie me-2"></i>Detalhes do Cliente</h5>
+                <button id="back-to-list-btn" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Voltar para a Lista
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="client-details-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>CNPJ:</strong> <span id="detail-cnpj"></span></p>
+                            <p><strong>Razão Social:</strong> <span id="detail-razao-social"></span></p>
+                            <p><strong>Nome Fantasia:</strong> <span id="detail-nome-fantasia"></span></p>
+                            <p><strong>Status:</strong> <span id="detail-ativo"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Endereço:</strong> <span id="detail-endereco"></span></p>
+                            <p><strong>Cidade/UF:</strong> <span id="detail-cidade-uf"></span></p>
+                            <p><strong>Email:</strong> <span id="detail-email-contato"></span></p>
+                            <p><strong>Telefone:</strong> <span id="detail-telefone-contato"></span></p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="loading-overlay" id="detail-loading-overlay">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Notas Fiscais do Cliente -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0"><i class="fas fa-file-invoice me-2"></i>Histórico de Notas Fiscais</h5>
+            </div>
+            <div class="card-body">
+                <!-- Cards de Resumo de Materiais -->
+                <div id="material-cards-container" class="row mb-3">
+                    <!-- Cards de materiais serão inseridos aqui via JS -->
+                </div>
+
+                <!-- Tabela de Notas Fiscais -->
+                <div class="table-responsive">
+                    <table id="notes-table" class="table table-striped table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nº da Nota</th>
+                                <th>Data de Emissão</th>
+                                <th>Material</th>
+                                <th>Quantidade (Kg)</th>
+                                <th>Valor (R$)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados das notas serão carregados aqui via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/cliente-detalhes.js"></script>
+</body>
+</html> 

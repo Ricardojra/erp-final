@@ -1,0 +1,821 @@
+
+
+<div class="container-fluid px-4">
+    <!-- Bloco de resumo de status com cards para notas fiscais -->
+    <div class="row mb-4">
+        <!-- Card para notas disponíveis -->
+        <div class="col-xl col-md-6 mb-4">
+            <div class="card interactive-card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success mb-1">Notas Disponíveis</div>
+                            <!-- Exibe contagem de notas disponíveis, inicializado com 0 -->
+                            <div id="contador-disponiveis-dash" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <!-- Ícone representando notas disponíveis -->
+                        <div class="col-auto"><i class="fas fa-check-circle fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card para notas enviadas -->
+        <div class="col-xl col-md-6 mb-4">
+            <div class="card interactive-card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info mb-1">Notas Enviadas</div>
+                            <!-- Exibe contagem de notas enviadas, inicializado com 0 -->
+                            <div id="contador-enviadas-dash" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <!-- Ícone representando notas enviadas -->
+                        <div class="col-auto"><i class="fas fa-paper-plane fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card para notas vendidas -->
+        <div class="col-xl col-md-6 mb-4">
+            <div class="card interactive-card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary mb-1">Notas Vendidas</div>
+                            <!-- Exibe contagem de notas vendidas, inicializado com 0 -->
+                            <div id="contador-vendidas-dash" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <!-- Ícone representando notas vendidas -->
+                        <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card para notas reprovadas -->
+        <div class="col-xl col-md-6 mb-4">
+            <div class="card interactive-card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger mb-1">Notas Reprovadas</div>
+                            <div id="contador-reprovadas-dash" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-times-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card para notas pendentes -->
+        <div class="col-xl col-md-6 mb-4">
+            <div class="card interactive-card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning mb-1">Notas Pendentes</div>
+                            <div id="contador-pendente-dash" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card para notas ofertadas -->
+        <div class="col-xl col-md-6 mb-4">
+            <div class="card interactive-card border-left-dark shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-dark mb-1">Notas Ofertadas</div>
+                            <div id="contador-ofertada-dash" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tag fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contêiner principal do conteúdo do dashboard -->
+    <div class="container-fluid mt-4" id="content">
+        <!-- Cabeçalho do dashboard -->
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-8">
+                <!-- Título do dashboard com ícone -->
+                <h4 class="text-muted mb-0">
+                    <i class="fas fa-chart-pie me-2"></i>DashBoard - Materiais
+                </h4>
+                <!-- Descrição do dashboard -->
+                <p class="text-muted mb-0 small">Visão geral do status de materiais (valores em toneladas)</p>
+            </div>
+            <!-- Botão para atualizar os dados -->
+            <div class="col-md-4 text-end">
+                <button id="refresh-btn" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-sync-alt me-1"></i> Atualizar
+                </button>
+            </div>
+        </div>
+
+        <!-- Seção de alertas e informações -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <!-- Alerta informativo sobre a unidade de medida -->
+                <div class="alert alert-info d-flex align-items-center py-2">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <div class="small">
+                        <strong>Unidade de medida:</strong> Todos os valores são exibidos em toneladas (t)
+                        com precisão de duas casas decimais. Passe o mouse sobre os valores para detalhes.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards de materiais -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow">
+                    <!-- Cabeçalho da seção de materiais -->
+                    <div class="card-header py-3 d-flex flex-wrap align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">
+                            <i class="fas fa-boxes me-2"></i>Materiais por Status
+                        </h5>
+                        <!-- Dropdown para filtrar os materiais -->
+                        <div class="dropdown mt-2 mt-md-0">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                                id="materialFilterDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-filter me-1"></i> Filtrar
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item active" href="#" data-filter="all">Todos</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-filter="disponivel">Disponível</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="enviada">Enviada</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="vendida">Vendida</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Card para Metal -->
+                            <div class="col-xl-3 col-md-6 mb-4 material-card" data-material="metal">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <!-- Título do material com ícone -->
+                                        <h5 class="card-title mb-3">
+                                            <i id="metal-icon" class="fas fa-tools material-icon text-metal"></i> Metal
+                                        </h5>
+
+                                        <!-- Total Geral -->
+                                        <div class="material-status-item mb-3">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted fw-bold">Total Geral</span>
+                                                <!-- Exibe total geral em toneladas -->
+                                                <span id="contador-metal-total" class="fw-bold"
+                                                    data-bs-toggle="tooltip">0,00 t</span>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para total geral -->
+                                                <div id="progress-metal-total" class="progress-bar progress-bar-total">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Disponível -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Disponível</span>
+                                                <div>
+                                                    <!-- Exibe quantidade disponível -->
+                                                    <span id="contador-metal-disponivel" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-metal-disponivel"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status disponível -->
+                                                <div id="progress-metal-disponivel" class="progress-bar bg-success">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Enviada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Enviada</span>
+                                                <div>
+                                                    <!-- Exibe quantidade enviada -->
+                                                    <span id="contador-metal-enviada" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-metal-enviada"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status enviada -->
+                                                <div id="progress-metal-enviada" class="progress-bar bg-info"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Vendida -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Vendida</span>
+                                                <div>
+                                                    <span id="contador-metal-vendida" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-metal-vendida" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-metal-vendida" class="progress-bar bg-primary"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Reprovada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Reprovada</span>
+                                                <div>
+                                                    <span id="contador-metal-reprovada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-metal-reprovada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-metal-reprovada" class="progress-bar bg-danger"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Pendente -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Pendente</span>
+                                                <div>
+                                                    <span id="contador-metal-pendente" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-metal-pendente" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-metal-pendente" class="progress-bar bg-warning"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Ofertada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Ofertada</span>
+                                                <div>
+                                                    <span id="contador-metal-ofertada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-metal-ofertada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-metal-ofertada" class="progress-bar" style="background-color: #6f42c1;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card para Papel -->
+                            <div class="col-xl-3 col-md-6 mb-4 material-card" data-material="papel">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <!-- Título do material com ícone -->
+                                        <h5 class="card-title mb-3">
+                                            <i id="papel-icon" class="fas fa-file-alt material-icon text-papel"></i>
+                                            Papel
+                                        </h5>
+
+                                        <!-- Total Geral -->
+                                        <div class="material-status-item mb-3">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted fw-bold">Total Geral</span>
+                                                <!-- Exibe total geral em toneladas -->
+                                                <span id="contador-papel-total" class="fw-bold"
+                                                    data-bs-toggle="tooltip">0,00 t</span>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para total geral -->
+                                                <div id="progress-papel-total" class="progress-bar progress-bar-total">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Disponível -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Disponível</span>
+                                                <div>
+                                                    <!-- Exibe quantidade disponível -->
+                                                    <span id="contador-papel-disponivel" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-papel-disponivel"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status disponível -->
+                                                <div id="progress-papel-disponivel" class="progress-bar bg-success">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Enviada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Enviada</span>
+                                                <div>
+                                                    <!-- Exibe quantidade enviada -->
+                                                    <span id="contador-papel-enviada" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-papel-enviada"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status enviada -->
+                                                <div id="progress-papel-enviada" class="progress-bar bg-info"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Vendida -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Vendida</span>
+                                                <div>
+                                                    <span id="contador-papel-vendida" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papel-vendida" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papel-vendida" class="progress-bar bg-primary"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Reprovada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Reprovada</span>
+                                                <div>
+                                                    <span id="contador-papel-reprovada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papel-reprovada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papel-reprovada" class="progress-bar bg-danger"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Pendente -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Pendente</span>
+                                                <div>
+                                                    <span id="contador-papel-pendente" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papel-pendente" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papel-pendente" class="progress-bar bg-warning"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Ofertada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Ofertada</span>
+                                                <div>
+                                                    <span id="contador-papel-ofertada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papel-ofertada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papel-ofertada" class="progress-bar" style="background-color: #6f42c1;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card para Papelão -->
+                            <div class="col-xl-3 col-md-6 mb-4 material-card" data-material="papelao">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <!-- Título do material com ícone -->
+                                        <h5 class="card-title mb-3">
+                                            <i id="papelao-icon" class="fas fa-cubes material-icon text-papelao"></i>
+                                            Papelão
+                                        </h5>
+
+                                        <!-- Total Geral -->
+                                        <div class="material-status-item mb-3">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted fw-bold">Total Geral</span>
+                                                <!-- Exibe total geral em toneladas -->
+                                                <span id="contador-papelao-total" class="fw-bold"
+                                                    data-bs-toggle="tooltip">0,00 t</span>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para total geral -->
+                                                <div id="progress-papelao-total"
+                                                    class="progress-bar progress-bar-total"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Disponível -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Disponível</span>
+                                                <div>
+                                                    <!-- Exibe quantidade disponível -->
+                                                    <span id="contador-papelao-disponivel" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-papelao-disponivel"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status disponível -->
+                                                <div id="progress-papelao-disponivel" class="progress-bar bg-success">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Enviada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Enviada</span>
+                                                <div>
+                                                    <!-- Exibe quantidade enviada -->
+                                                    <span id="contador-papelao-enviada" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-papelao-enviada"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status enviada -->
+                                                <div id="progress-papelao-enviada" class="progress-bar bg-info"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Vendida -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Vendida</span>
+                                                <div>
+                                                    <!-- Exibe quantidade vendida -->
+                                                    <span id="contador-papelao-vendida" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-papelao-vendida"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status vendida -->
+                                                <div id="progress-papelao-vendida" class="progress-bar bg-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Reprovada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Reprovada</span>
+                                                <div>
+                                                    <span id="contador-papelao-reprovada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papelao-reprovada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papelao-reprovada" class="progress-bar bg-danger"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Pendente -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Pendente</span>
+                                                <div>
+                                                    <span id="contador-papelao-pendente" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papelao-pendente" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papelao-pendente" class="progress-bar bg-warning"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Ofertada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Ofertada</span>
+                                                <div>
+                                                    <span id="contador-papelao-ofertada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-papelao-ofertada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-papelao-ofertada" class="progress-bar" style="background-color: #6f42c1;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card para Plástico -->
+                            <div class="col-xl-3 col-md-6 mb-4 material-card" data-material="plastico">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <!-- Título do material com ícone -->
+                                        <h5 class="card-title mb-3">
+                                            <i id="plastico-icon"
+                                                class="fas fa-shopping-bag material-icon text-plastico"></i> Plástico
+                                        </h5>
+
+                                        <!-- Total Geral -->
+                                        <div class="material-status-item mb-3">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted fw-bold">Total Geral</span>
+                                                <!-- Exibe total geral em toneladas -->
+                                                <span id="contador-plastico-total" class="fw-bold"
+                                                    data-bs-toggle="tooltip">0,00 t</span>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para total geral -->
+                                                <div id="progress-plastico-total"
+                                                    class="progress-bar progress-bar-total"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Disponível -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Disponível</span>
+                                                <div>
+                                                    <!-- Exibe quantidade disponível -->
+                                                    <span id="contador-plastico-disponivel"
+                                                        class="material-status-value" data-bs-toggle="tooltip">0,00
+                                                        t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-plastico-disponivel"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status disponível -->
+                                                <div id="progress-plastico-disponivel" class="progress-bar bg-success">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Enviada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Enviada</span>
+                                                <div>
+                                                    <!-- Exibe quantidade enviada -->
+                                                    <span id="contador-plastico-enviada" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-plastico-enviada"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status enviada -->
+                                                <div id="progress-plastico-enviada" class="progress-bar bg-info"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Vendida -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Vendida</span>
+                                                <div>
+                                                    <!-- Exibe quantidade vendida -->
+                                                    <span id="contador-plastico-vendida" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-plastico-vendida"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status vendida -->
+                                                <div id="progress-plastico-vendida" class="progress-bar bg-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Reprovada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Reprovada</span>
+                                                <div>
+                                                    <span id="contador-plastico-reprovada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-plastico-reprovada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-plastico-reprovada" class="progress-bar bg-danger"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Pendente -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Pendente</span>
+                                                <div>
+                                                    <span id="contador-plastico-pendente" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-plastico-pendente" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-plastico-pendente" class="progress-bar bg-warning"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Ofertada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Ofertada</span>
+                                                <div>
+                                                    <span id="contador-plastico-ofertada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-plastico-ofertada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-plastico-ofertada" class="progress-bar" style="background-color: #6f42c1;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card para Vidro -->
+                            <div class="col-xl-3 col-md-6 mb-4 material-card" data-material="vidro">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <!-- Título do material com ícone -->
+                                        <h5 class="card-title mb-3">
+                                            <i id="vidro-icon" class="fas fa-wine-bottle material-icon text-vidro"></i>
+                                            Vidro
+                                        </h5>
+
+                                        <!-- Total Geral -->
+                                        <div class="material-status-item mb-3">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted fw-bold">Total Geral</span>
+                                                <!-- Exibe total geral em toneladas -->
+                                                <span id="contador-vidro-total" class="fw-bold"
+                                                    data-bs-toggle="tooltip">0,00 t</span>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para total geral -->
+                                                <div id="progress-vidro-total" class="progress-bar progress-bar-total">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Disponível -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Disponível</span>
+                                                <div>
+                                                    <!-- Exibe quantidade disponível -->
+                                                    <span id="contador-vidro-disponivel" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-vidro-disponivel"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status disponível -->
+                                                <div id="progress-vidro-disponivel" class="progress-bar bg-success">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Enviada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Enviada</span>
+                                                <div>
+                                                    <!-- Exibe quantidade enviada -->
+                                                    <span id="contador-vidro-enviada" class="material-status-value"
+                                                        data-bs-toggle="tooltip">0,00 t</span>
+                                                    <!-- Exibe percentual -->
+                                                    <span id="percentage-vidro-enviada"
+                                                        class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <!-- Barra de progresso para status enviada -->
+                                                <div id="progress-vidro-enviada" class="progress-bar bg-info"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Vendida -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Vendida</span>
+                                                <div>
+                                                    <span id="contador-vidro-vendida" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-vidro-vendida" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-vidro-vendida" class="progress-bar bg-primary"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Reprovada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Reprovada</span>
+                                                <div>
+                                                    <span id="contador-vidro-reprovada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-vidro-reprovada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-vidro-reprovada" class="progress-bar bg-danger"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Pendente -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Pendente</span>
+                                                <div>
+                                                    <span id="contador-vidro-pendente" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-vidro-pendente" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-vidro-pendente" class="progress-bar bg-warning"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Ofertada -->
+                                        <div class="material-status-item">
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="small text-muted">Ofertada</span>
+                                                <div>
+                                                    <span id="contador-vidro-ofertada" class="material-status-value" data-bs-toggle="tooltip">0,00 t</span>
+                                                    <span id="percentage-vidro-ofertada" class="text-muted small ms-1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-thin">
+                                                <div id="progress-vidro-ofertada" class="progress-bar" style="background-color: #6f42c1;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção do gráfico de resumo -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow">
+                    <!-- Cabeçalho do gráfico -->
+                    <div class="card-header py-3">
+                        <h5 class="m-0 font-weight-bold text-primary">
+                            <i class="fas fa-chart-bar me-2"></i>Resumo por Material
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Contêiner para o gráfico gerado por Chart.js -->
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="materialSummaryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
